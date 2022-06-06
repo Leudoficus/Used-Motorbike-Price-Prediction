@@ -1,27 +1,27 @@
 # Used-Motorbike-Price-Prediction
-Di portofolio kali ini saya mencoba memprediksi harga jual motor bekas menggunakan dataset Used Price Honda 2016. Dataset ini merupakan daftar stock unit konsumen gagal bayar yang sudah diakuisisi perusahaan pembiayaan keuangan. Singkat cerita, akhirnya unit-unit ini akan di distribusi di kemudian hari untuk mengurangi kerugian perusahaan.
-Untuk itu, saya mencoba untuk memprediksi harga jual motor bekas menggunakan dataset ini menggunakan metode Linier regression sebagai baseline modelnya. Selanjutnya menggunakan beberapa metode lainnya seperti Lasso, Ridge, Decision Tree Regressor, Random Forest Regressor, Gradient Boosting Regressor, K-Neighbors Regressor. Dan pada akhirnya mendapatkan model terbaik menggunakan metode Gradient Boosting Regressor untuk memprediksi harga jual motor bekas.
+In this portfolio I try to predict used price of motorbike using Used Price Honda 2016 dataset. This dataset denote list of stock unit from NPL (Non-Perfomed Loan) customer which has been acquired by the finance company. In short, finally these units will be distribute in the next day to reduce company loss.
+Therefore, I try to predict the used price using Linier regression method as a baseline model. Furthermore using several others method as a Lasso, Ridge, Decision Tree Regressor, Random Forest Regressor, Gradient Boosting Regressor, K-Neighbors Regressor. And in the end obtain the best model using Gradient Boosting Regressor method to predict used price of motorbike.
 
 ## **Exploratory Data Analisys**
-saya menganalisa ada beberapa point penting sebelum di lakukan modelling. diantaranya adalah :
-1. Fitur CATEGORY, BRAND MODEL TYPE, MODEL, TYPE, CODE ENGINE ternyata sudah terwakili oleh fitur **GROUP MODEL TYPE**, sehingga pada bagian selanjutnya pada fitur CATEGORY, BRAND MODEL TYPE, MODEL, TYPE, CODE ENGINE akan saya buang.
-2. **DOCUMENT** dengan **STNK Y** memiliki average SOLD PRICE lebih tinggi daripada STNK N walaupun perbedaan tidak terlalu signifikan. baik itu di CONDITION GRADE A,B,C,D.
-3. pada **CONDITION GRADE 'D'** di tahun 2011-2013 tidak ada perbedaan **SOLD PRICE** yang signifikan. Dan usia kendaraan di tahun ke-5 & ke-6 (tahun 2010-2011), perbedaan **SOLD PRICE** antara **CONDITION GRADE 'C' & 'D'** juga tidak signifikan. Kemungkinan besar dikarenakan tingkat kerusakan yang tinggi. Sehingga pembeli tidak memperhitungkan harga pasar, tetapi lebih banyak memperhitungkan harga spare part, dan biaya jasa perbaikan yang tinggi.
-4. sebaliknya untuk usia kendaraan belum 1 tahun (tahun 2016), **CONDITION GRADE** tidak terlalu mempengaruhi **SOLD PRICE** kecuali unit yang kondisinya sangat jelek (CONDITION GRADE 'D').
-5. Pada scatter plot yang saya buat, **CONDITION GRADE 'A'** memiliki karakter **LOST PART** yang lebih kecil dibandingkan Grade B selanjutnya grade C dan D, selain itu juga memiliki **SOLD PRICE** yang cenderung lebih tinggi dibandingkan condition grade B selanjutnya C dan D.
-6. fitur **MARKET PRICE, NEW PRICE, SOLD PRICE MINIMUM** memiliki karakter yang sama terhadap fitur **SOLD PRICE**. Secara linier, semakin tinggi MARKET PRICE, NEW PRICE, SOLD PRICE MINIMUM semakin tinggi pula SOLD PRICE yang terbentuk sesuai dengan kondisi motor dengan grade A cenderung berada pada posisi SOLD PRICE lebih tinggi, grade B cenderung lebih rendah dari pada grade B dan seterusnya pada grade C & D.
+I analyze there are several important point before the modelling. among others are :
+1. feature CATEGORY, BRAND MODEL TYPE, MODEL, TYPE, CODE ENGINE turned out to have been represented by **GROUP MODEL TYPE**, so that in the next part these features  CATEGORY, BRAND MODEL TYPE, MODEL, TYPE, CODE ENGINE will be drop.
+2. **DOCUMENT** with **STNK Y** have higher average SOLD PRICE than STNK N even though the different is not significant. even in CONDITION GRADE A,B,C,D.
+3. In **CONDITION GRADE 'D'** in year 2011-2013 there is no significant different on **SOLD PRICE**. And in the age of vehicle in fifth & sixth years old (year 2010-2011), the different of **SOLD PRICE** between **CONDITION GRADE 'C' & 'D'** is not significant also. most likely because of the high damage rate. So that the buyer does not take into account the market price, but it takes more into account the price of spare parts, and the high cost of repair services.
+4. otherwise for the age less than 1 year old (year 2016), the **CONDITION GRADE** does not affect the **SOLD PRICE** unless unit with very bad condition (CONDITION GRADE 'D').
+5. On the scatterplot I made, **CONDITION GRADE 'A'** have a characteristic lower **LOST PART** than a Grade B furthermore grade C and D, besides that it also has a higher **SOLD PRICE** compared with condition grade B next C and D.
+6. feature **MARKET PRICE, NEW PRICE, SOLD PRICE MINIMUM** have the similar characteristic to the **SOLD PRICE**. Linierly, the higher MARKET PRICE, NEW PRICE, SOLD PRICE MINIMUM affect to the higher SOLD PRICE formed in accordance with the grade A tend to be in higher SOLD PRICE, then condition grade B tend to be lower than condition grade B and so on in condition grade C & D.
 
-## Kesimpulan
+## Summary
 ### 1. Insight :
-Berdasarkan model Analysis,
-- fitur **NEW PRICE** menjadi fitur yang paling berpengaruh terhadap prediksi **SOLD PRICE**.
-- fitur **YEAR** menjadi fitur berpengaruh kedua terhadap prediksi **SOLD PRICE**.
-- fitur **LOST PART, GROUP MODEL TYPE, CONDITION GRADE** masih berpengaruh terhadap prediksi **SOLD PRICE** tapi tidak terlalu signifikan jika dibandingkan dengan fitur NEW PRICE dan YEAR.
-- sedangkan fitur **DOCUMENT** sedikit sekali pengaruhnya terhadap fitur **SOLD PRICE**.
-- hasil tuning hyperparameter dengan model **Gradient Boosting Regressor** memiliki nilai **Mean Average Error** sebesar **709166.0635159286**. yang artinya terdapat margin error sebesar +- 709.166,06 poin terhadap hasil prediksi.
-- sedangkan nilai **R2 Score** sebesar **0.9159404231650905**. yang artinya prediksi SOLD PRICE menggunakan model Gradient Boosting Regressor bisa diprediksi dengan akurasi hingga 91,59%.
+Based on analysis model,
+- feature **NEW PRICE** become the most impact feature to predict **SOLD PRICE**.
+- feature **YEAR** become the sceond most impact feature to predict **SOLD PRICE**.
+- feature **LOST PART, GROUP MODEL TYPE, CONDITION GRADE** still affect features to predict **SOLD PRICE** but it not too significant if compared with NEW PRICE and YEAR.
+- at the same time feature **DOCUMENT** have very small impact to predict feature **SOLD PRICE**.
+- the result of tuning hyperparameter with **Gradient Boosting Regressor** model have the result of **Mean Average Error** in the ammount of **709166.0635159286**. which means there are margin error as big as +- 709.166,06 point to the prediction result.
+- while **R2 Score** value as big as **0.9159404231650905** which means SOLD PRICE predict using Gradient Boosting Regressor model can be predicted with accuracy up to 91,59%.
 
 ### 2 Recomendations :
-- untuk memprediksi **SOLD PRICE** motor bekas, stake holder wajib memperhatikan dan wajib memiliki referensi Harga Baru (**NEW PRICE**) model dan tipe motor yang akan dijual.
-- setelah itu, Tahun Produksi (**YEAR**) menjadi parameter kedua yang harus diperhatikan pada saat memprediksi **SOLD PRICE** motor bekas.
-- sedangkan Kondisi motor (**CONDITION GRADE**) dan **model tipe** motor hanya menjadi faktor pendukung untuk memprediksi **SOLD PRICE**.
+- to predict **SOLD PRICE** of used motorbike, stakeholders must pay attention and must have a **New Price** reference from the model and type of motorbike for sale.
+- after that, production year (**YEAR**) become the second parameters what to pay attention to when predicting **SOLD PRICE** of used motorbike.
+- whereas the **CONDITION GRADE** and **model type** of motorbike only a supporting factors to predict **SOLD PRICE**.
